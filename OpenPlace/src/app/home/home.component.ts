@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
   boardArr: Pixel[] = [];
   userFilter: string | null = null;
   pixelQueue: Pixel[] = [];
-  dimensions: BoardSize = { width: environment.boardWidth, height: environment.boardHeight };
+  dimensions: BoardSize = { height: 20, width: 20 };
+;
   panzoom: PanzoomObject = null!;
   leaderboard: Leaderboard[] = [];
   progress: string = "0.00 MB fetched...";
@@ -107,8 +108,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private signalRService: SignalRService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.initConfiguration();
+  async ngOnInit() {
+    await this.initConfiguration();
     this.initCanvas();
     this.initUsernameAndID();
     this.initPanzoom();
@@ -133,14 +134,16 @@ export class HomeComponent implements OnInit {
     }, 30000); // Update every 30 seconds
   }
 
-  private initConfiguration() {
-    fetch(environment.endpointUrl + "/Config")
+  private async initConfiguration() {
+    await fetch(environment.endpointUrl + "/Config")
       .then(response => response.json())
       .then(data => {
         this.userCount = data.onlineUsersCount + 1;
         this.maxMessageLength = data.maxMessageLength;
         this.maxUsernameLength = data.maxUsernameLength;
-
+        environment.boardHeight = data.boardHeight;
+        environment.boardWidth = data.boardWidth;
+        this.dimensions = { width: environment.boardWidth, height: environment.boardHeight }
         this.restoreLast20Messages(data.messages);
       })
       .catch((response) => {
