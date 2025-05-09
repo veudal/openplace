@@ -189,7 +189,7 @@ export class HomeComponent implements OnInit {
       contain: 'outside',
       cursor: 'pointer',
       step: 0.7,
-      minScale: 1,
+      minScale: 1.000001, // No rounding to avoid visual glitches
       maxScale: Math.min(this.dimensions.width, this.dimensions.height) / 10,
       touchAction: ""
     });
