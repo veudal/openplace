@@ -1,0 +1,21 @@
+* {
+  color: white;
+}
+
+div{
+  padding: 0px 30px 0px 12px;
+}
+
+.email-link {
+  color: mediumslateblue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+  .email-link:hover {
+    text-decoration: underline; 
+  }
+
+.email-wrapper {
+  display: inline;
+}

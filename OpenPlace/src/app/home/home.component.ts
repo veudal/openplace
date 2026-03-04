@@ -554,7 +554,9 @@ export class HomeComponent implements OnInit {
     // Delete the first entry if all colors are taken
     if (this.takenColors.size == colors.length) {
       const firstKey = this.takenColors.keys().next().value;
-      this.takenColors.delete(firstKey);
+      if (firstKey !== undefined) {
+        this.takenColors.delete(firstKey); // NEW CHANGE
+      }
     }
 
     const availableColors = colors.filter(color => !Array.from(this.takenColors.values()).includes(color));
