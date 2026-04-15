@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  endpointUrl: "https://openplace.azurewebsites.net/api",
+  endpointUrl: "https://open-place.azurewebsites.net/api",
   boardWidth: 20,
   boardHeight: 20,
 };
